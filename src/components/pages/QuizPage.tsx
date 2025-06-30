@@ -1,44 +1,43 @@
 import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../const';
+import  Display from '../Display/Display';
 import quizData  from '../../data/quiz';
-import Button  from '../Button/Button';
-import Display from '../Display/Display';
+import Button from '../Button/Button';
 
-export default function QuizPage(){
+export default function QuizPage() {
     const [quizIndex,setQuizIndex] = useState(0);
-    const [answerLog,setAnswerLog] = useState([]);
+    const [answerLogs,setAnswerLogs] = useState([]);
     const navigation = useNavigate();
-    const MAX_QUIZ_LEN = quizData.length;
+    const MAX_QUIZ_LEN = quizData.length
     const handleClick = (clickedIndex)=> {
         if(clickedIndex === quizData[quizIndex].answerIndex){
-            setAnswerLog([...answerLog,((prev)=> [prev,true])])
+            setAnswerLogs(prev => [...prev,true])
         } else {
-            setAnswerLog([...answerLog,((prev)=> [prev,false])])
+            setAnswerLogs(prev => [...prev,false])
         }
-        setQuizIndex((prev) => prev + 1)
+        setQuizIndex(prev => prev + 1);
     }
 
-        useEffect(()=> {
-            const correctNumLen = answerLog.filter((answer)=> {
-                return answer === true
-            })
-            if(answerLog.length === MAX_QUIZ_LEN ){
-                navigation(ROUTES.RESULT,{
+        useEffect(() => {
+            if(answerLogs.length === MAX_QUIZ_LEN){
+            const correctNumLen = answerLogs.filter(answer => answer === true)
+                navigation(ROUTES.RESULT, {
                     state: {
                         maxQuizLen: MAX_QUIZ_LEN,
-                        correctNumLen: correctNumLen.length,
+                        correctNumLen: correctNumLen
                     }
-                })
+                });
             }
-        })
+        }, [answerLogs, MAX_QUIZ_LEN, navigation]);
+
 
     return (
         <>
-            {quizData[quizIndex] && <Display>{`Q${quizIndex +1}. ${quizData[quizIndex].question}`}</Display>}
+            {quizData[quizIndex] && <Display>{`Q${quizIndex +1}.${quizData[quizIndex].question}`}</Display>}
             {quizData[quizIndex] && quizData[quizIndex].options.map((option,index)=> {
                 return <Button key={`option-${index}`} onClick={()=> handleClick(index)}>{option}</Button>
-            })}
+            })} 
         </>
     )
 }
