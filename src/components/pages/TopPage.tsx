@@ -5,7 +5,7 @@ export default function TopPage(){
     return (
         <>
             <h1>トップ画面</h1>
-            <Link path={ROUTES.QUIZ}>クイズスタート</Link>
+            <Link to={ROUTES.QUIZ}>クイズスタート</Link>
         </>
     )
 }

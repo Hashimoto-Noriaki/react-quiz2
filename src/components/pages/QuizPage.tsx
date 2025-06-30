@@ -1,5 +1,13 @@
+import quizData  from '../../data/quiz';
+import Display from '../Display/Display';
+
 export default function QuizPage(){
+    const quizIndex = 0;
     return (
-        <div>クイズ画面</div>
+        <Display>
+            <div>
+                <p>{`Q1.${quizData[quizIndex].question}`}</p>
+            </div>
+        </Display>
     )
 }
