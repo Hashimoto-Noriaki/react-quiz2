@@ -1,4 +1,5 @@
 import { Link,useLocation } from 'react-router-dom';
+import Confetti from 'react-confetti';
 import { ROUTES } from '../../const';
 import Result from '../Result/Result';
 
@@ -11,6 +12,7 @@ export default function ResultPage(){
             <h1>結果発表</h1>
             <Result maxQuizLen={maxQuizLen} correctNumLen={correctNumLen}/>
             <Link to={ROUTES.QUIZ}>もう一度挑戦する</Link>
+            <Confetti/>
         </>
     )
 }
