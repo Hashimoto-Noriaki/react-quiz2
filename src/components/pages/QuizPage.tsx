@@ -1,13 +1,19 @@
 import quizData  from '../../data/quiz';
+import Button  from '../Button/Button';
 import Display from '../Display/Display';
 
 export default function QuizPage(){
     const quizIndex = 0;
     return (
-        <Display>
-            <div>
-                <p>{`Q1.${quizData[quizIndex].question}`}</p>
-            </div>
-        </Display>
+        <>
+            <Display>
+                {`Q1. ${quizData[quizIndex].question}`}
+            </Display>
+            <Button>{quizData[quizIndex].options[0]}</Button>
+            <Button>{quizData[quizIndex].options[1]}</Button>
+            <Button>{quizData[quizIndex].options[2]}</Button>
+            <Button>{quizData[quizIndex].options[3]}</Button>
+            <Button>{quizData[quizIndex].options[4]}</Button>
+        </>
     )
 }
