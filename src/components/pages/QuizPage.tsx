@@ -2,7 +2,7 @@ import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../const';
 import quizData  from '../../data/quiz';
-import Display from '../../Display/Display';
+import Display from '../Display/Display';
 import Button from '../Button/Button';
 
 export default function QuizPage() {
