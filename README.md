@@ -1,3 +1,7 @@
+# この動画で練習
+
+https://www.youtube.com/watch?v=TgU-FT2WdS4
+
 # アプリ設計
 ### ページ一覧
 1.Topページ
