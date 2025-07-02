@@ -1,5 +1,11 @@
+import { Link } from 'react-router-dom';
+import { ROUTES } from '../../const';
+
 export default function TopPage () {
     return (
-        <div>トップページ</div>
+        <>
+            <h1>QuizApp</h1>
+            <Link to={ROUTES.QUIZ}>クイズページへ遷移</Link>
+        </>
     )
 }
