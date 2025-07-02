@@ -12,18 +12,16 @@ export default function QuizPage () {
     const MAX_QUIZ_LEN = quizData.length
     const handleClick = (clickedIndex) => {
         if(clickedIndex == quizData[quizIndex].answerIndex){
-            setAnswerLogs([...answerLogs,((prev) => [...prev,true])]);
+            setAnswerLogs(prev => [...prev,true]);
         } else {
-            setAnswerLogs([...answerLogs,((prev) => [...prev,false])]);
+            setAnswerLogs(prev => [...prev,false]);
         }
-        setQuizIndex((prev) => prev + 1)
+        setQuizIndex(prev=> prev + 1)
     }
 
         useEffect(()=> {
             if(answerLogs.length === MAX_QUIZ_LEN){
-                const correctNumLen = answerLogs.filter((answer)=> {
-                    return answer === true
-                })
+                const correctNumLen = answerLogs.filter(answer => answer === true)
                 navigation(ROUTES.RESULT, {
                     state: {
                         maxQuizLen: MAX_QUIZ_LEN,
