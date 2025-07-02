@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../const';
 import quizData  from '../../data/quiz';
 import Display from '../../Display/Display';
 import Button from '../Button/Button';
@@ -6,15 +8,29 @@ import Button from '../Button/Button';
 export default function QuizPage() {
     const [quizIndex,setQuizIndex] = useState(0);
     const [answerLogs,setAnswerLogs] = useState([]);
+    const navigation = useNavigate();
+    const MAX_QUIZ_LEN = quizData.length;
 
     const handleClick = (clickedIndex) => {
         if(clickedIndex === quizData[quizIndex].answerIndex){
-            setAnswerLogs([...answerLogs,((prev) => [...prev,true])])
+            setAnswerLogs(prev => [...prev,true])
         } else {
-            setAnswerLogs([...answerLogs,((prev) => [...prev,false])])
+            setAnswerLogs(prev => [...prev,false])
         }
-        setQuizIndex((prev) => prev +1 );
+        setQuizIndex(prev => prev +1 );
     }
+
+    useEffect(()=> {
+        if(answerLogs.length === MAX_QUIZ_LEN){
+            const correctNumLen = answerLogs.filter(answer=> answer === true)
+            navigation(ROUTES.RESULT,{
+                state: {
+                    maxQuizLen: MAX_QUIZ_LEN,
+                    correctNumLen: correctNumLen.length
+                }
+            })
+        }
+    },[answerLogs, MAX_QUIZ_LEN, navigation])
     return (
         <>
             {quizData[quizIndex] && <Display>{`Q${quizIndex +1}.${quizData[quizIndex].question}`}</Display>}
